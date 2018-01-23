@@ -57,7 +57,7 @@
                                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                                 <span>Выход</span>
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                            <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                         </div>
                     </div>
                 @endif
