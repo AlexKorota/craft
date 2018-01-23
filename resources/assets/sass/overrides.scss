@@ -11,7 +11,7 @@
 
 //Navigation panel
 .navbar {
-  height: 150px;
+  height: 135px;
   background-color: #18191b;
   border-bottom: 2px solid #ff5c2b;
   a{
@@ -20,17 +20,18 @@
   a:hover {
     color: #ff5c2b;
     background-color: #18191b;
+    border-bottom: 1px solid #ff5c2b;
   }
 
   .navbar-brand {
     .navbar-item img{
-      max-height: 140px;
+      max-height: 120px;
     }
   }
 
   .navbar-start {
     .navbar-item img {
-      max-height: 75px;
+      max-height: 55px;
       width: auto;
 
     }
@@ -42,11 +43,17 @@
   }
 
   .navbar-dropdown {
+    border: 2px solid #ff5c2b;
     padding-bottom: 0;
     padding-top: 1px;
     .navbar-item {
       text-align: left;
       background-color: #18191b;
+    }
+    .navbar-item:hover{
+      background-color:#18191b ;
+      border: 1px solid #ff5c2b;
+      color:#ff5c2b;
     }
   }
   .navbar-divider{

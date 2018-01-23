@@ -1394,7 +1394,7 @@ a.box:active {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: white;
+  background-color: rgba(185, 99, 46, 0.87);
   border-color: #dbdbdb;
   color: #363636;
   cursor: pointer;
@@ -1472,7 +1472,7 @@ a.box:active {
 .button.is-text {
   background-color: transparent;
   border-color: transparent;
-  color: #4a4a4a;
+  color: black;
   text-decoration: underline;
 }
 
@@ -17282,7 +17282,7 @@ label.panel-block:hover {
 }
 
 .navbar {
-  height: 150px;
+  height: 135px;
   background-color: #18191b;
   border-bottom: 2px solid #ff5c2b;
 }
@@ -17294,14 +17294,15 @@ label.panel-block:hover {
 .navbar a:hover {
   color: #ff5c2b;
   background-color: #18191b;
+  border-bottom: 1px solid #ff5c2b;
 }
 
 .navbar .navbar-brand .navbar-item img {
-  max-height: 140px;
+  max-height: 120px;
 }
 
 .navbar .navbar-start .navbar-item img {
-  max-height: 75px;
+  max-height: 55px;
   width: auto;
 }
 
@@ -17311,6 +17312,7 @@ label.panel-block:hover {
 }
 
 .navbar .navbar-dropdown {
+  border: 2px solid #ff5c2b;
   padding-bottom: 0;
   padding-top: 1px;
 }
@@ -17320,6 +17322,12 @@ label.panel-block:hover {
   background-color: #18191b;
 }
 
+.navbar .navbar-dropdown .navbar-item:hover {
+  background-color: #18191b;
+  border: 1px solid #ff5c2b;
+  color: #ff5c2b;
+}
+
 .navbar .navbar-divider {
   background-color: #b05229;
   margin: 0rem;
@@ -17327,6 +17335,14 @@ label.panel-block:hover {
 
 .card-content {
   margin: 20px;
+}
+
+.side-menu {
+  position: fixed;
+  height: 100vh;
+  width: 200px;
+  background-color: white;
+  overflow-y: scroll;
 }
 
 /*
