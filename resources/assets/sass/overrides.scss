@@ -1,0 +1,61 @@
+//#app{
+//  background-image: url('/images/pages-fone.jpg');
+//}
+
+.is-muted{
+  color: #9a4d28;
+}
+.is-muted:hover{
+  color: #ff5c2b;
+}
+
+//Navigation panel
+.navbar {
+  height: 150px;
+  background-color: #18191b;
+  border-bottom: 2px solid #ff5c2b;
+  a{
+    color: #b05229;
+  }
+  a:hover {
+    color: #ff5c2b;
+    background-color: #18191b;
+  }
+
+  .navbar-brand {
+    .navbar-item img{
+      max-height: 140px;
+    }
+  }
+
+  .navbar-start {
+    .navbar-item img {
+      max-height: 75px;
+      width: auto;
+
+    }
+  }
+
+  a.navbar-item {
+    display: block;
+    text-align: center;
+  }
+
+  .navbar-dropdown {
+    padding-bottom: 0;
+    padding-top: 1px;
+    .navbar-item {
+      text-align: left;
+      background-color: #18191b;
+    }
+  }
+  .navbar-divider{
+    background-color:#b05229;
+    margin: 0rem;
+  }
+}
+
+.card-content{
+  margin: 20px;
+}
+
