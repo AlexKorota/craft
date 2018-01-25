@@ -8,8 +8,8 @@
         Администрирование
     </p>
     <ul class="menu-list">
-        <li><a href="#">Управление пользователями</a></li>
-        <li><a href="#">Роли и права</a></li>
+        <li><a href="{{ route('users.index') }}">Управление пользователями</a></li>
+        <li><a href="{{ route('permissions.index') }}">Роли и права</a></li>
     </ul>
 </aside>
 </div>
