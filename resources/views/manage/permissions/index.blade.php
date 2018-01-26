@@ -31,8 +31,8 @@
                                 <td>{{ $permission->name }}</td>
                                 <td>{{ $permission->description }}</td>
                                 <td class="has-text-centered">
-                                    <a class="button is-outlined is-small m-r-5" href="{{route('permissions.show', $permission->id)}}">Просмотр</a>
-                                    <a class="button is-outlined is-small" href="{{route('permissions.edit', $permission->id)}}">Редактировать</a>
+                                    <a class="button is-warning is-small m-r-5" href="{{route('permissions.show', $permission->id)}}"><i class="fa fa-eye" aria-hidden="true" >Просмотр</i></a>
+                                    <a class="button is-warning is-small " href="{{route('permissions.edit', $permission->id)}}"><i class="fa fa-pencil-square-o">Редактировать</i></a>
                                 </td>
                             </tr>
                         @endforeach

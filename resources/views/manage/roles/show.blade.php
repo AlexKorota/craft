@@ -7,11 +7,11 @@
         <div class="content">
             <div class="columns">
                 <div class="column is-two-thirds">
-                    <h1 class="title">Просмотр разрешения</h1>
+                    <h1 class="title">Просмотр роли</h1>
                     <hr>
                 </div>
                 <div class="column is-pulled-right">
-                    <a class="button is-warning" href="{{route('permissions.edit', $permission->id)}}"><i class="fa fa-pencil-square-o m-r-10"></i>Редактировать</a>
+                    <a class="button is-warning" href="{{route('roles.edit', $role->id)}}"><i class="fa fa-pencil-square-o m-r-10"></i>Редактировать</a>
                 </div>
             </div>
             <div class="card">
@@ -20,19 +20,27 @@
                         <div class="column">
                             <div class="block">
                                 <h3>Название:</h3>
-                                <p>{{ $permission->display_name }}</p>
+                                <p>{{ $role->display_name }}</p>
                             </div>
                         </div>
                         <div class="column">
                             <div class="block">
                                 <h3>Slug:</h3>
-                                <p>{{ $permission->name }}</p>
+                                <p>{{ $role->name }}</p>
                             </div>
                         </div>
-                        <div class="column">
+                        <div class="column is-half">
                             <div class="block">
                                 <h3>Описание:</h3>
-                                <p>Это разрешение позволяет пользователю {{ $permission->description }}</p>
+                                <p>{{$role->description}}</p>
+                                <hr>
+                                <p>{{$role->display_name}} имеет следующие права:
+                                <ul>
+                                    @foreach($role->permissions as $p)
+                                        <li>{{$p->display_name}} - <em>{{$p->description}}</em></li>
+                                    @endforeach
+                                </ul>
+                                </p>
                             </div>
                         </div>
                     </div>
