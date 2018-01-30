@@ -17338,11 +17338,8 @@ label.panel-block:hover {
 }
 
 .side-menu {
-  position: fixed;
   height: 100vh;
   width: 250px;
-  background-color: white;
-  overflow-y: scroll;
 }
 
 .managment-area {
@@ -17354,6 +17351,13 @@ label.panel-block:hover {
 
 .flex-container {
   margin-top: 20px;
+}
+
+.card-widget {
+  max-width: 250px;
+  min-width: 200px;
+  height: 150px;
+  padding-right: 10px;
 }
 
 /*

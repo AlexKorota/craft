@@ -16,7 +16,7 @@
                             <th>Имя</th>
                             <th>Email</th>
                             <th>Дата регистрации</th>
-                            <th>Действия</th>
+                            <th></th>
                         </tr>
                         </thead>
 
@@ -27,7 +27,8 @@
                                 <th><a href="{{route('users.show', $user->id)}}"> {{ $user->name }}</a></th>
                                 <th>{{ $user->email }}</th>
                                 <th>{{ $user->created_at }}</th>
-                                <th><a class="button is-outlined" href="#">Забанить</a> </th>
+                                <th><a  class="button is-warning" href="{{route('users.show', $user->id)}}"><i class="fa fa-eye m-r-5" aria-hidden="true"></i>Профиль </a></th>
+                                <th><a class="button is-outlined is-danger" href="#"><i class="fa fa-ban m-r-5" aria-hidden="true"></i>Забанить</a> </th>
                             </tr>
                         @endforeach
                         </tbody>
