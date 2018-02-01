@@ -23,6 +23,7 @@ Route::prefix('manage')->middleware('role:superadministrator|administrator|autho
 	Route::resource('/users', 'UserController', ['except' => ['create', 'destroy', 'store']]);
 	Route::resource('/permissions', 'PermissionController', ['except' => 'destroy']);
 	Route::resource('/roles', 'RoleController', ['except' => 'destroy']);
+	Route::resource('/categories', 'CategoryController', ['only' => ['index', 'create', 'store']]);
 	Route::resource('/posts', 'PostController');
 });
 

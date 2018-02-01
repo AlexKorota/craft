@@ -12,6 +12,7 @@
             <ul>
                 <li><a href="{{ route('posts.create') }}">Создать новый пост</a></li>
                 <li><a href="{{ route('posts.index') }}">Список постов</a></li>
+                <li><a href="{{ route('categories.index') }}">Категории</a></li>
             </ul>
         </li>
         <li><a href="{{ route('users.index') }}">Пользователи</a></li>

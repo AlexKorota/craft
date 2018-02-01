@@ -14,9 +14,18 @@
                     <div class="card">
                         <div class="card-content">
                             <b-field>
+                                <b-select placeholder="Категория">
+                                    @foreach( $categories as $category )
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                    <input type="hidden" name="slug"/>
+                                    @endforeach
+                                </b-select>
+                            </b-field>
+                            <b-field>
                                 <b-input placeholder="Название поста"
                                          size="is-medium"
-                                         v-model="title">
+                                         v-model="title"
+                                         name="title">
                                 </b-input>
                             </b-field>
 
@@ -26,7 +35,8 @@
                             <b-field class="m-t-20">
                                 <b-input placeholder="Тело поста..."
                                          type="textarea"
-                                         rows="30">
+                                         rows="30"
+                                         name="content">
                                 </b-input>
                             </b-field>
                         </div>
