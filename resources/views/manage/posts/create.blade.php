@@ -7,7 +7,7 @@
                 <h1 class="title">Создание нового поста</h1>
             </div>
         </div>
-        <form action="{{route('posts.store')}}" method="POST">
+        <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="columns">
                 <div class="column is-three-quarters-desktop">
@@ -34,13 +34,37 @@
                             <slug-widget url="{{url('/')}}" subdirectory="blog" :title="title" @slug-changed="updateSlug"></slug-widget>
                             <input type="hidden" v-model="slug" name="slug"/>
 
-                            <b-field class="m-t-20">
-                                <b-input placeholder="Тело поста..."
-                                         type="textarea"
-                                         rows="30"
-                                         name="content">
-                                </b-input>
-                            </b-field>
+                                {{--image input--}}
+
+                                    <b-field class="m-t-10">
+                                        <b-upload v-model="image" name="image">
+                                            <a class="button is-warning">
+                                                <i class="fa fa-upload" aria-hidden="true"></i>
+                                                <span class="m-l-5">Загрузить основное изображение поста</span>
+                                            </a>
+                                        </b-upload>
+                                        <div v-if="image && image.length">
+                                            <span class="file-name" v-text="image[0].name"></span>
+                                        </div>
+                                    </b-field>
+
+                                {{--end image input--}}
+                                {{-- tags input --}}
+                                    <b-field>
+                                        <b-taginput
+                                            v-model="tags"
+                                            placeholder="Введите теги">
+                                        </b-taginput>
+                                    </b-field>
+                                    <input type="hidden" name="tags" :value="tags">
+                            {{-- end tags input --}}
+                                    <b-field class="m-t-20">
+                                        <b-input placeholder="Тело поста..."
+                                            type="textarea"
+                                            rows="30"
+                                            name="content">
+                                        </b-input>
+                                    </b-field>
                         </div>
                     </div>
                 </div> <!-- end of column .three-quarters-->
@@ -73,9 +97,11 @@
         var app = new Vue({
             el: '#app',
             data: {
+                tags: [],
+                image: [],
                 title: '',
                 slug: '',
-                api_token: '{{Auth::user()->api_token}}'
+                api_token: '{{Auth::user()->api_token}}',
             },
             methods: {
                 updateSlug: function(val){

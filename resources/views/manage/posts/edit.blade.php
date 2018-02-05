@@ -77,7 +77,7 @@
                 title: '{!! $post->title !!}',
                 {{--slug: '{!! $post->slug !!}',--}}
                 content: '{!! $post->content !!}',
-                api_token: '{{Auth::user()->api_token}}'
+                {{--api_token: '{{Auth::user()->api_token}}'--}}
             },
             methods: {
 //                updateSlug: function(val){
