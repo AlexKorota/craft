@@ -17360,6 +17360,14 @@ label.panel-block:hover {
   padding-right: 10px;
 }
 
+.post-list-buttons {
+  width: 150px;
+}
+
+.post-image {
+  text-align: center;
+}
+
 /*
 This .scss loop will create "margin helpers" and "padding helpers" for use in your web projects.
 It will generate several classes such as:

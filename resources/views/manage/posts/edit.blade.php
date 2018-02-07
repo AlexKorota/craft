@@ -7,7 +7,7 @@
                 <h1 class="title">Редактирование</h1>
             </div>
         </div>
-        <form action="{{route('posts.update', $post->id)}}" method="POST">
+        <form action="{{route('posts.update', $post->id)}}" method="POST" enctype="multipart/form-data">
             {{csrf_field()}}
             {{method_field('PUT')}}
             <div class="columns">
@@ -17,10 +17,9 @@
                             <b-field>
                                 <b-select placeholder="Категория" v-model="category">
                                     @foreach( $categories as $category )
-                                        <option
-                                                value="{{$category->id}}">{{$category->name}}
+                                        <option value="{{$category->id}}">{{$category->name}}
                                     @endforeach
-                                            <input type="hidden" name="category" value="{{$category->id}}"/>
+                                            <input type="hidden" name="category" value="{{$category->id}}"><input>
                                         </option>
                                 </b-select>
                             </b-field>
@@ -28,13 +27,38 @@
                                 <b-input placeholder="Название поста"
                                          size="is-medium"
                                          v-model="title"
+                                         :value = "title"
                                          name="title">
                                 </b-input>
                             </b-field>
 
-                            {{--<slug-widget url="{{url('/')}}" subdirectory="blog" :title="title" @slug-changed="updateSlug"></slug-widget>--}}
-                            {{--<input type="hidden" v-model="slug" name="slug"/>--}}
+                            <slug-widget url="{{url('/')}}" subdirectory="blog" :title="title" @slug-changed="updateSlug"></slug-widget>
+                            <input type="hidden" v-model="slug" name="slug"/>
 
+                            {{--image input--}}
+
+                            <b-field class="m-t-10">
+                                <b-upload v-model="image" name="image">
+                                    <a class="button is-warning">
+                                        <i class="fa fa-upload" aria-hidden="true"></i>
+                                        <span class="m-l-5">Изменить основное изображение поста</span>
+                                    </a>
+                                </b-upload>
+                                <div v-if="image && image.length">
+                                    <span class="file-name" v-text="image[0].name"></span>
+                                </div>
+                            </b-field>
+
+                            {{--end image input--}}
+                            {{-- tags input --}}
+                            <b-field>
+                                <b-taginput
+                                        v-model="tags"
+                                        placeholder="Введите теги">
+                                </b-taginput>
+                            </b-field>
+                            <input type="hidden" name="tags" :value="tags">
+                            {{-- end tags input --}}
                             <b-field class="m-t-20">
                                 <b-input placeholder="Тело поста..."
                                          type="textarea"
@@ -49,22 +73,34 @@
                 <div class="column is-one-quarter-desktop">
                     <div class="card-widget m-t-20">
                         <ul>
-                            <li><button
-                                        class="button is-success is-fullwidth" >Опубликовать
+                            <li><button class="button is-success is-fullwidth" >
+                                    Опубликовать
                                     <input type="hidden" name="status" value="2"/>
                                 </button>
                             </li>
-                            <li><button
-                                        class="button is-info is-fullwidth m-t-15" >Сохранить как черновик
+                            <li><button class="button is-info is-fullwidth m-t-15" >
+                                    Сохранить как черновик
                                     <input type="hidden" name="status" value="1"/>
                                 </button>
+                             </form>
                             </li>
-                            <li><a href="{{route('posts.index')}}" class="button is-danger is-fullwidth m-t-15">Отменить</a> </li>
+
+{{--А СТОИТ ЛИ ДАВАТЬ ВОЗМОЖНОСТЬ УДАЛИТЬ?--}}
+                            {{--<form action="{{route('posts.destroy', $post->id)}}" method="POST" enctype="multipart/form-data">--}}
+                                {{--{{csrf_field()}}--}}
+                                {{--{{method_field('DELETE')}}--}}
+                            {{--<li><button class="button is-danger is-fullwidth m-t-15">Удалить пост</button> </li>--}}
+                            {{--</form>--}}
+                            <li class="m-t-10">
+                                 Статус:
+                                    @if($post->status == 1) Черновик
+                                    @elseif($post->status == 2) Опубликован
+                                    @endif
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </form>
     </div>
 @endsection
 
@@ -73,17 +109,18 @@
         var app = new Vue({
             el: '#app',
             data: {
-                category: '{!! $post->category_id !!}',
+                category: '{!! $post->category->id !!}',
                 title: '{!! $post->title !!}',
-                {{--slug: '{!! $post->slug !!}',--}}
-                content: '{!! $post->content !!}',
-                {{--api_token: '{{Auth::user()->api_token}}'--}}
+                tags: [{!! $tags !!}],
+                slug: '{!! $post->slug !!}',
+                content: '{!! trim(json_encode($post->content), "\"") !!}',
+                api_token: '{{Auth::user()->api_token}}'
             },
             methods: {
-//                updateSlug: function(val){
-//                    this.slug = val;
-//                }
-            }
+                updateSlug: function(val){
+                    this.slug = val;
+                }
+            },
         });
     </script>
 
