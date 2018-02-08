@@ -10,19 +10,39 @@
         <div class="card">
             <div class="card-content">
                 <div class="content">
+                    <form action="{{route('users.update', $user->id)}}" method="POST" enctype="multipart/form-data">
+                        {{csrf_field()}}
+                        {{method_field('PUT')}}
                     <div class="columns">
                         <div class="column">
-                            <figure class="image is-128x128">
-                               <img src="https://bulma.io/images/placeholders/128x128.png">
-                            </figure>
+                            <div class="avatar">
+                                <figure class="image avatar-image is-128x128">
+                                    <img src="{{ asset('users_avatars/' . $user->avatar) }}">
+                                </figure>
+                                <b-field>
+                                    <b-upload v-model="avatar" name="avatar">
+                                        <a class="button is-warning">
+                                            <i class="fa fa-upload" aria-hidden="true"></i>
+                                            <span class="m-l-5">Загрузить аватар</span>
+                                        </a>
+                                    </b-upload>
+                                    <div v-if="avatar && avatar.length">
+                                        <span class="file-name" v-text="avatar[0].name"></span>
+                                    </div>
+                                </b-field>
+                            </div>
                             <br>
-                            <p>Никнейм: {{ $user->name }}</p>
+                            <b-field label="Ник:">
+                                <b-input placeholder="Ник"
+                                         size="is-medium"
+                                         v-model="name"
+                                         {{--:value = "name"--}}
+                                         name="name">
+                                </b-input>
+                            </b-field>
                         </div> <!-- firs column end -->
                         <div class="column">
                             <h4>Роли:</h4>
-                            <form action="{{route('users.update', $user->id)}}" method="POST">
-                                {{csrf_field()}}
-                                {{method_field('PUT')}}
                             <input type="hidden" :value="rolesSelected" name="roles">
                             <ul>
                                 @foreach($roles as $role)
@@ -32,15 +52,18 @@
                                 @endforeach
                             </ul>
                             <button class="button is-warning m-l-30"><i class="fa fa-floppy-o m-r-10"></i>Сохранить</button>
-                            </form>
                         </div> <!-- Second column end -->
                     </div>
                     <h4>О себе:</h4>
-                    <div class="card">
-                        <div class="card-content">
-                            Тут будет информация о пользователе
-                        </div>
-                    </div>
+                        <b-field class="m-t-20">
+                            <b-input placeholder="Пару слов о себе"
+                                 type="textarea"
+                                 rows="5"
+                                 v-model="description"
+                                 name="description">
+                            </b-input>
+                        </b-field>
+                    </form>
                 </div>
             </div>
         </div>
@@ -53,6 +76,9 @@
         var app = new Vue({
             el: '#app',
             data: {
+                name: '{{$user->name}}',
+                description: '{{$user->description}}',
+                avatar: [],
                 rolesSelected: {!! $user->roles->pluck('id') !!},
             },
         });

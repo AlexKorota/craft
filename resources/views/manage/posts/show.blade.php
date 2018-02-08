@@ -5,7 +5,21 @@
     <div class="flex-container m-l-30">
         <div class="columns">
             <div class="column">
-                <h1 class="title">{{$post->title}}</h1>
+                <div class="post-title">{{$post->title}}</div>
+                <div class="post-info">
+                    Автор: <a href="{{route('users.show', $post->author_id)}}">{{$post->user->name}} </a>
+                    Дата поста: #
+                </div>
+                    <div class="tag-block m-t-5">
+                        @foreach($tags as $tag)
+                            <form action="{{route('post.findbytag', $tag->id)}}" method="POST">
+                                {{csrf_field()}}
+                                <button class="button tag-button is-small is-rounded">{{$tag->name}}
+                                    <input type="hidden" name="id" value="{{$tag->id}}"/>
+                                </button>
+                            </form>
+                        @endforeach
+                    </div>
             </div>
         </div>
             <div class="columns">
@@ -16,15 +30,6 @@
                     </div>
                     @endif
                     {!! $post->content !!}
-                    <hr>
-
-                    <div class="card">
-                        <div class="card-content">
-                            @foreach($tags as $tag)
-                                <span>{{$tag}}</span>
-                            @endforeach
-                        </div>
-                    </div>
 
                 </div> <!-- end of column .three-quarters-->
                 <div class="column is-one-quarter-desktop">
@@ -51,7 +56,7 @@
                             </form>
 
 {{--А СТОИТ ЛИ ДАВАТЬ ВОЗМОЖНОСТЬ УДАЛИТЬ?--}}
-                            {{--<form action="{{route('posts.destroy', $post->id)}}" method="POST" enctype="multipart/form-data">--}}
+                            {{--<form action="{{route('posts.destroy', $post->id)}}" method="POST">--}}
                                 {{--{{csrf_field()}}--}}
                                 {{--{{method_field('DELETE')}}--}}
                                 {{--<li><button class="button is-danger is-fullwidth m-t-15">Удалить пост</button> </li>--}}

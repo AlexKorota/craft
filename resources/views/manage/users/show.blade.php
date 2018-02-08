@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="flex-container  m-l-20">
-
         <div class="columns">
             <div class="column is-centered">
                 <h1 class="title">Профиль</h1>
@@ -16,9 +15,11 @@
                 <div class="content">
                     <div class="columns">
                         <div class="column">
-                            <figure class="image is-128x128">
-                                <img src="https://bulma.io/images/placeholders/128x128.png">
-                            </figure>
+                            <div class="avatar">
+                                <figure class="image avatar-image is-128x128">
+                                    <img src="{{ asset('users_avatars/' . $user->avatar) }}">
+                                </figure>
+                            </div>
                             <br>
                             <h4>Никнейм:</h4>
                             <p>{{$user->name}}</p>
@@ -35,14 +36,12 @@
                     <h4>О себе:</h4>
                     <div class="card">
                         <div class="card-content">
-                            Тут будет информация о пользователе
+                            {{$user->description}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
 @endsection
 

@@ -36,7 +36,11 @@
                             <input type="hidden" v-model="slug" name="slug"/>
 
                             {{--image input--}}
-
+                            @if(isset($post->image))
+                            <figure class="image is-128x128 m-t-5">
+                                <img src="{{ asset('post_images/' . $post->image) }}">
+                            </figure>
+                            @endif
                             <b-field class="m-t-10">
                                 <b-upload v-model="image" name="image">
                                     <a class="button is-warning">
@@ -73,34 +77,26 @@
                 <div class="column is-one-quarter-desktop">
                     <div class="card-widget m-t-20">
                         <ul>
-                            <li><button class="button is-success is-fullwidth" >
-                                    Опубликовать
-                                    <input type="hidden" name="status" value="2"/>
-                                </button>
+                            <li>
+                                <button class="button is-success is-fullwidth" >Сохранить</button>
                             </li>
-                            <li><button class="button is-info is-fullwidth m-t-15" >
-                                    Сохранить как черновик
-                                    <input type="hidden" name="status" value="1"/>
-                                </button>
-                             </form>
-                            </li>
-
-{{--А СТОИТ ЛИ ДАВАТЬ ВОЗМОЖНОСТЬ УДАЛИТЬ?--}}
-                            {{--<form action="{{route('posts.destroy', $post->id)}}" method="POST" enctype="multipart/form-data">--}}
-                                {{--{{csrf_field()}}--}}
-                                {{--{{method_field('DELETE')}}--}}
+                            {{--А СТОИТ ЛИ ДАВАТЬ ВОЗМОЖНОСТЬ УДАЛИТЬ?--}}
+                            {{--<form action="{{route('posts.destroy', $post->id)}}" method="POST">--}}
+                            {{--{{csrf_field()}}--}}
+                            {{--{{method_field('DELETE')}}--}}
                             {{--<li><button class="button is-danger is-fullwidth m-t-15">Удалить пост</button> </li>--}}
                             {{--</form>--}}
                             <li class="m-t-10">
-                                 Статус:
-                                    @if($post->status == 1) Черновик
-                                    @elseif($post->status == 2) Опубликован
-                                    @endif
+                                Статус:
+                                @if($post->status == 1) Черновик
+                                @elseif($post->status == 2) Опубликован
+                                @endif
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
+        </form>
     </div>
 @endsection
 
@@ -111,8 +107,9 @@
             data: {
                 category: '{!! $post->category->id !!}',
                 title: '{!! $post->title !!}',
-                tags: [{!! $tags !!}],
                 slug: '{!! $post->slug !!}',
+                image: [],
+                tags: {!! $post->tags()->pluck('name') !!},
                 content: '{!! trim(json_encode($post->content), "\"") !!}',
                 api_token: '{{Auth::user()->api_token}}'
             },

@@ -26,6 +26,7 @@ Route::prefix('manage')->middleware('role:superadministrator|administrator|autho
 	Route::resource('/categories', 'CategoryController', ['only' => ['index', 'create', 'store']]);
 	Route::resource('/posts', 'PostController');
 	Route::post('posts/{id}', 'PostController@editPostStatus')->name('post.status');
+	Route::post('posts/tag/{id}', 'PostController@findPostsByTag')->name('post.findbytag');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
