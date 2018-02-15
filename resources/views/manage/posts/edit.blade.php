@@ -106,11 +106,11 @@
             el: '#app',
             data: {
                 category: '{!! $post->category->id !!}',
-                title: '{!! $post->title !!}',
+                title: '{!! addslashes($post->title) !!}',
                 slug: '{!! $post->slug !!}',
                 image: [],
                 tags: {!! $post->tags()->pluck('name') !!},
-                content: '{!! trim(json_encode($post->content), "\"") !!}',
+                content: '{!! trim(json_encode(preg_replace(['/\'/','/\"/'], '', $post->content)), '"') !!}' ,
                 api_token: '{{Auth::user()->api_token}}'
             },
             methods: {

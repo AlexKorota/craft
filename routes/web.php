@@ -11,22 +11,26 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
+Route::post('/posts/tags/{tag}', 'PostController@findPostsByTag')->name('post.findbytag');
+
+Route::resource('/users', 'UserController', ['except' => ['create', 'destroy', 'store']]);
+
 Route::prefix('manage')->middleware('role:superadministrator|administrator|author|subscriber')->group(function (){
 	Route::get('/', 'ManageController@index');
 	Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
-	Route::resource('/users', 'UserController', ['except' => ['create', 'destroy', 'store']]);
-	Route::resource('/permissions', 'PermissionController', ['except' => 'destroy']);
-	Route::resource('/roles', 'RoleController', ['except' => 'destroy']);
-	Route::resource('/categories', 'CategoryController', ['only' => ['index', 'create', 'store']]);
+	Route::resource('/permissions', 'PermissionController', ['except' => 'destroy'])->middleware('role:superadministrator');
+	Route::resource('/roles', 'RoleController', ['except' => 'destroy'])->middleware('role:superadministrator');
+	Route::resource('/categories', 'CategoryController', ['only' => ['index', 'create', 'store']])->middleware('role:superadministrator');
+	Route::post('/posts/{id}', 'PostController@editPostStatus')->name('post.status');
+
 	Route::resource('/posts', 'PostController');
-	Route::post('posts/{id}', 'PostController@editPostStatus')->name('post.status');
-	Route::post('posts/tag/{id}', 'PostController@findPostsByTag')->name('post.findbytag');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

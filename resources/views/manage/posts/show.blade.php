@@ -11,11 +11,12 @@
                     Дата поста: #
                 </div>
                     <div class="tag-block m-t-5">
-                        @foreach($tags as $tag)
-                            <form action="{{route('post.findbytag', $tag->id)}}" method="POST">
+                        {{--@foreach($tags as $tag)--}}
+                        @foreach($post->tags as $tag)
+                            <form action="{{route('post.findbytag', $tag->name)}}" method="POST">
                                 {{csrf_field()}}
                                 <button class="button tag-button is-small is-rounded">{{$tag->name}}
-                                    <input type="hidden" name="id" value="{{$tag->id}}"/>
+                                    <input type="hidden" name="name" value="{{$tag->name}}"/>
                                 </button>
                             </form>
                         @endforeach
@@ -29,9 +30,10 @@
                         <img src="{{ asset('post_images/' . $post->image) }}"  height="400" width="400">
                     </div>
                     @endif
-                    {!! $post->content !!}
+                    {!! htmlspecialchars_decode($post->content) !!}
 
                 </div> <!-- end of column .three-quarters-->
+                @if(Auth::user()->id == $post->author_id || Auth::user()->hasRole( 'superadministrator'))
                 <div class="column is-one-quarter-desktop">
                     <div class="card-widget m-t-20">
                         <ul>
@@ -50,11 +52,11 @@
                                     </button>
                                 </li>
                             @endif
+
                                 <li>
                                    <a href="{{route('posts.edit', $post->id)}}" class="button is-warning is-fullwidth m-t-15">Редактировать </a>
                                 </li>
                             </form>
-
 {{--А СТОИТ ЛИ ДАВАТЬ ВОЗМОЖНОСТЬ УДАЛИТЬ?--}}
                             {{--<form action="{{route('posts.destroy', $post->id)}}" method="POST">--}}
                                 {{--{{csrf_field()}}--}}
@@ -68,9 +70,9 @@
                                     @endif
                                 </li>
                         </ul>
-
                     </div>
                 </div>
+                @endif
             </div>
     </div>
 

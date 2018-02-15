@@ -6,9 +6,11 @@
             <div class="column is-centered">
                 <h1 class="title">Профиль</h1>
             </div>
+        @if(Auth::user()->id == $user->id || Auth::user()->hasRole('superadministrator'))
             <div class="column is-pulled-right">
                 <a class="button is-warning" href="{{route('users.edit', $user->id)}}"><i class="fa fa-pencil-square-o m-r-10"></i>Редактировать</a>
             </div>
+            @endif
         </div>
         <div class="card">
             <div class="card-content">

@@ -43,7 +43,7 @@
                             <span>Приветствую, {{ Auth::user()->name }}</span>
                         </a>
                         <div class="navbar-dropdown">
-                            <a href="#" class="navbar-item">
+                            <a href="{{"/users/" . Auth::user()->id}}" class="navbar-item">
                                 <i class="fa fa-user-circle" aria-hidden="true"></i>
                                 <span>Профиль</span>
                             </a>

@@ -41,7 +41,9 @@
                                 </b-input>
                             </b-field>
                         </div> <!-- firs column end -->
+
                         <div class="column">
+                            @role('superadministrator')
                             <h4>Роли:</h4>
                             <input type="hidden" :value="rolesSelected" name="roles">
                             <ul>
@@ -51,6 +53,7 @@
                                     </div>
                                 @endforeach
                             </ul>
+                            @endrole
                             <button class="button is-warning m-l-30"><i class="fa fa-floppy-o m-r-10"></i>Сохранить</button>
                         </div> <!-- Second column end -->
                     </div>

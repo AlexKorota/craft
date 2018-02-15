@@ -17,4 +17,9 @@ class UserObserver
 		$user->api_token = bin2hex(openssl_random_pseudo_bytes(30));
 	}
 
+	public function created(User $user)
+	{
+		$user->roles()->sync(4);
+	}
+
 }

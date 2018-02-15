@@ -28,7 +28,14 @@
                                 <th>{{ $user->email }}</th>
                                 <th>{{ $user->created_at }}</th>
                                 <th><a  class="button is-warning" href="{{route('users.show', $user->id)}}"><i class="fa fa-eye m-r-5" aria-hidden="true"></i>Профиль </a></th>
-                                <th><a class="button is-outlined is-danger" href="#"><i class="fa fa-ban m-r-5" aria-hidden="true"></i>Забанить</a> </th>
+                                @role('superadministrator|administrator')
+                                <th>
+                                    <a class="button is-outlined is-danger" href="#">
+                                        <i class="fa fa-ban m-r-5" aria-hidden="true"></i>
+                                        Забанить
+                                    </a>
+                                </th>
+                                @endrole
                             </tr>
                         @endforeach
                         </tbody>
