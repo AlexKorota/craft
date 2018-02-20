@@ -36,7 +36,7 @@ class PostManager
 	 * @return Post (s)
 	 * @internal param int $id
 	 */
-	public static function managePost($request, $id)
+	public function managePost($request, $id)
 	{
 		if(is_null($id)){
 			$post = new Post();
@@ -96,7 +96,7 @@ class PostManager
 	 * @return void
 	 * @internal param int $id
 	 */
-	public static function deletePost($id)
+	public function deletePost($id)
 	{
 		$post = Post::FindOrFail($id);;
 		$post->tags()->detach();
@@ -112,7 +112,7 @@ class PostManager
 	 * @return Post (s)
 	 *
 	 */
-	public static function editPostStatus($request, $id)
+	public function editPostStatus($request, $id)
 	{
 		$post = Post::FindOrFail($id);
 		$post->status = $request->status;

@@ -182,6 +182,11 @@ return [
 
 //	    Custom providers
         App\Providers\PostManagerServiceProvider::class,
+        App\Providers\PermissionManagerServiceProvider::class,
+        App\Providers\RoleManagerServiceProvider::class,
+        App\Providers\CategoryManagerServiceProvider::class,
+        App\Providers\UserManagerServiceProvider::class,
+	    DevMarketer\LaraFlash\LaraFlashServiceProvider::class,
 
     ],
 
@@ -234,6 +239,9 @@ return [
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Laratrust'   => Laratrust\LaratrustFacade::class,
+        'LaraFlash' => DevMarketer\LaraFlash\LaraFlashFacade::class,
+//	    My Facades
+
 
     ],
 
