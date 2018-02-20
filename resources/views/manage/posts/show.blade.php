@@ -13,10 +13,10 @@
                     <div class="tag-block m-t-5">
                         {{--@foreach($tags as $tag)--}}
                         @foreach($post->tags as $tag)
-                            <form action="{{route('post.findbytag', $tag->name)}}" method="POST">
+                            <form action="{{route('post.findbytag', $tag->id)}}" method="POST">
                                 {{csrf_field()}}
                                 <button class="button tag-button is-small is-rounded">{{$tag->name}}
-                                    <input type="hidden" name="name" value="{{$tag->name}}"/>
+                                    <input type="hidden" name="name" value="{{$tag->id}}"/>
                                 </button>
                             </form>
                         @endforeach

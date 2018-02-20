@@ -11,14 +11,13 @@
 |
 */
 
-
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function (){
+	return redirect(route('home'));
 });
 
 Auth::routes();
 
-Route::post('/posts/tags/{tag}', 'PostController@findPostsByTag')->name('post.findbytag');
+Route::match(['get', 'post'], '/posts/tags/{tag}', 'PostController@findPostsByTag')->name('post.findbytag');
 
 Route::resource('/users', 'UserController', ['except' => ['create', 'destroy', 'store']]);
 
@@ -34,3 +33,6 @@ Route::prefix('manage')->middleware('role:superadministrator|administrator|autho
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/{id}', 'HomeController@postShow')->name('post');
+
+
