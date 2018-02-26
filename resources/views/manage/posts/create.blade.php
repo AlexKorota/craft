@@ -7,24 +7,41 @@
                 <h1 class="title">Создание нового поста</h1>
             </div>
         </div>
+        <div class="columns">
+            <div class="column is-one-third">
+                @if (count($errors) > 0)
+                    <div class="notification is-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        </div>
+
         <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="columns">
                 <div class="column is-three-quarters-desktop">
                     <div class="card">
                         <div class="card-content">
-                            <b-field>
-                                <b-select placeholder="Категория">
+                            <b-field label="Категория">
+                                <b-select v-model="category" required>
+                                    {{--<option disabled value="">Категория</option>--}}
                                     @foreach( $categories as $category )
                                     <option
                                         value="{{$category->id}}">{{$category->name}}
-                                    @endforeach
-                                        <input type="hidden" name="category" value="{{$category->id}}"/>
                                     </option>
+                                    @endforeach
+                                        <input type="hidden" name="category" v-model="category"/>
                                 </b-select>
                             </b-field>
                             <b-field>
                                 <b-input placeholder="Название поста"
+                                         minlength="3"
+                                         required
                                          size="is-medium"
                                          v-model="title"
                                          name="title">
@@ -97,6 +114,7 @@
         var app = new Vue({
             el: '#app',
             data: {
+                category: '',
                 tags: [],
                 image: [],
                 title: '',

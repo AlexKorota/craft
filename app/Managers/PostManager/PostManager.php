@@ -6,7 +6,7 @@ namespace App\Managers\PostManager;
 use App\Post;
 use App\Tag;
 use Illuminate\Support\Facades\Auth;
-use Purifier;
+use Mews\Purifier\Facades\Purifier;
 use Image;
 
 class PostManager

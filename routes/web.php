@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::get('/', function (){
 	return redirect(route('home'));
 });
@@ -34,5 +36,8 @@ Route::prefix('manage')->middleware('role:superadministrator|administrator|autho
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/{id}', 'HomeController@postShow')->name('post');
+
+
+
 
 

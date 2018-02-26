@@ -14,17 +14,21 @@
                 <div class="column is-three-quarters-desktop">
                     <div class="card">
                         <div class="card-content">
-                            <b-field>
-                                <b-select placeholder="Категория" v-model="category">
+                            <b-field label="Категория">
+                                <b-select v-model="category" required>
+                                    {{--<option disabled value="">Категория</option>--}}
                                     @foreach( $categories as $category )
-                                        <option value="{{$category->id}}">{{$category->name}}
-                                    @endforeach
-                                            <input type="hidden" name="category" value="{{$category->id}}"><input>
+                                        <option
+                                                value="{{$category->id}}">{{$category->name}}
                                         </option>
+                                    @endforeach
+                                    <input type="hidden" name="category" v-model="category"/>
                                 </b-select>
                             </b-field>
                             <b-field>
                                 <b-input placeholder="Название поста"
+                                         minlength="3"
+                                         required
                                          size="is-medium"
                                          v-model="title"
                                          :value = "title"

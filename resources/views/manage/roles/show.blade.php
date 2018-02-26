@@ -14,6 +14,15 @@
                     <a class="button is-warning" href="{{route('roles.edit', $role->id)}}"><i class="fa fa-pencil-square-o m-r-10"></i>Редактировать</a>
                 </div>
             </div>
+            @if (session('success'))
+                <div class="columns">
+                    <div class="column is-one-third">
+                        <div class="notification is-primary">
+                            {{ Session::get('success') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="card">
                 <div class="card-content">
                     <div class="columns">

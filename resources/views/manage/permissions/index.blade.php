@@ -11,6 +11,15 @@
                 <a class="button is-warning" href="{{route('permissions.create')}}"><i class="fa fa-user-plus m-r-10"></i>Добавить разрешения</a>
             </div>
         </div>
+        @if (session('success'))
+            <div class="columns">
+                <div class="column is-one-third">
+                    <div class="notification is-primary">
+                        {{ Session::get('success') }}
+                    </div>
+                </div>
+            </div>
+        @endif
             <hr>
             <div class="card">
                 <div class="card-content">
