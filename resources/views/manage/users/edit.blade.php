@@ -7,6 +7,19 @@
                 <h1 class="title">Профиль</h1>
             </div>
         </div>
+        <div class="columns">
+            <div class="column is-one-third">
+                @if (count($errors) > 0)
+                    <div class="notification is-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        </div>
         <div class="card">
             <div class="card-content">
                 <div class="content">

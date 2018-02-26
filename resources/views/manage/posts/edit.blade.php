@@ -7,6 +7,19 @@
                 <h1 class="title">Редактирование</h1>
             </div>
         </div>
+        <div class="columns">
+            <div class="column is-one-third">
+                @if (count($errors) > 0)
+                    <div class="notification is-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        </div>
         <form action="{{route('posts.update', $post->id)}}" method="POST" enctype="multipart/form-data">
             {{csrf_field()}}
             {{method_field('PUT')}}
