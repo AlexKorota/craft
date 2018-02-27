@@ -7,30 +7,14 @@
         </div>
         <div class="navbar-menu">
             <div class="navbar-start m-t-20">
+                @foreach($categories as $category)
                 <figure class="image m-l-15">
-                    <a href="#" class="navbar-item">
-                        <img class="m-b-5" src="{{asset('images/menu_icons/water-icon.png')}}">
-                        <span>Water</span>
+                    <a href="{{route('posts.findbycategory', $category)}}" class="navbar-item">
+                        <img class="m-b-5" src="{{asset('category_images/' . $category->image)}}">
+                        <span>{{ $category->name }}</span>
                     </a>
                 </figure>
-                <figure class="image m-l-15">
-                    <a href="#" class="navbar-item">
-                        <img  class="m-b-5" src="{{asset('images/menu_icons/malts-icon.png')}}">
-                        <span>Malts</span>
-                    </a>
-                </figure>
-                <figure class="image m-l-15">
-                    <a href="#" class="navbar-item">
-                        <img class="m-b-5" src="{{asset('images/menu_icons/hops-icon.png')}}">
-                        <span>Hops</span>
-                    </a>
-                </figure>
-                <figure class="image m-l-15">
-                    <a href="#" class="navbar-item">
-                        <img class="m-b-5" src="{{asset('images/menu_icons/yeast-icon.png')}}">
-                        <span>Yeast</span>
-                    </a>
-                </figure>
+                @endforeach
             </div>
             <div class="navbar-end">
                 @if (Auth::guest())

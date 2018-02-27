@@ -3,6 +3,7 @@
 namespace App\Managers\PostManager;
 
 
+use App\Category;
 use App\Post;
 use App\Tag;
 use Illuminate\Support\Facades\Auth;
@@ -129,6 +130,13 @@ class PostManager
 	public function findPostsByTag($id)
 	{
 		$posts = Tag::findOrFail($id)->posts()->paginate(2);
+
+		return $posts;
+	}
+
+	public function findPostsByCategory($category)
+	{
+		$posts = Category::findOrFail($category)->posts()->paginate(2);
 
 		return $posts;
 	}

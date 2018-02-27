@@ -16,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 	    User::observe(UserObserver::class);
+
+	    view()->composer('_includes.nav.main', function($view){
+	    	$view->with('categories', \App\Category::all());
+	    });
     }
 
     /**

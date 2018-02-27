@@ -20,6 +20,7 @@ Route::get('/', function (){
 Auth::routes();
 
 Route::match(['get', 'post'], '/posts/tags/{tag}', 'PostController@findPostsByTag')->name('post.findbytag');
+Route::match(['get', 'post'], '/posts/{category}', 'PostController@findPostsByCategory')->name('posts.findbycategory');
 
 Route::resource('/users', 'UserController', ['except' => ['create', 'destroy', 'store']]);
 
