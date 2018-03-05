@@ -8,6 +8,11 @@ use Image;
 class CategoryManager
 {
 
+	/**
+	 * @param $request
+	 *
+	 * @return Category
+	 */
 	public function storeCategory($request)
 	{
 		$category = new Category();
